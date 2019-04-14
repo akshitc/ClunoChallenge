@@ -22,6 +22,9 @@ buildscript {
         retrofit_version = "2.5.0"
         okhttp_version = "3.12.1"
 
+        // picasso
+        picasso_version = "2.71828"
+
         // testing
         junit_version = "4.12"
         test_support_version = "1.0.2"

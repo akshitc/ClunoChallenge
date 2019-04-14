@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ClunoChallenge</string>
+    <string name="error_text">Something wrong has happened</string>
 </resources>

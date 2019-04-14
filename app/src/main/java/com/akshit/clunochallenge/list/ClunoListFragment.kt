@@ -3,12 +3,13 @@ package com.akshit.clunochallenge.list
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.akshit.clunochallenge.R
 import com.akshit.clunochallenge.model.ClunoListResponse
 import com.akshit.clunochallenge.network.RetrofitFactory
@@ -42,15 +43,16 @@ class ClunoListFragment : Fragment(), ClunoListView {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
+            addItemDecoration(DividerItemDecoration(context, (viewManager as LinearLayoutManager).orientation));
         }
         presenter.fetchCars()
     }
 
     override fun showCars(response: ClunoListResponse) {
-
+        recyclerView.adapter = ClunoListAdapter(response.items)
     }
 
     override fun showError() {
-
+        Toast.makeText(context, R.string.error_text, Toast.LENGTH_LONG).show()
     }
 }
