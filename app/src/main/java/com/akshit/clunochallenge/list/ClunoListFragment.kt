@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.akshit.clunochallenge.R
+import com.akshit.clunochallenge.model.ClunoListResponse
+import com.akshit.clunochallenge.network.RetrofitFactory
 import kotlinx.android.synthetic.main.fragment_cluno_list.*
 
 /**
@@ -30,7 +33,7 @@ class ClunoListFragment : Fragment(), ClunoListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = ClunoListPresenter()
+        presenter = ClunoListPresenter(this, RetrofitFactory.getRetrofitService())
         initViews()
     }
 
@@ -41,5 +44,13 @@ class ClunoListFragment : Fragment(), ClunoListView {
             layoutManager = viewManager
         }
         presenter.fetchCars()
+    }
+
+    override fun showCars(response: ClunoListResponse) {
+
+    }
+
+    override fun showError() {
+
     }
 }
