@@ -9,9 +9,12 @@ import android.widget.TextView
 import com.akshit.clunochallenge.R
 import com.akshit.clunochallenge.model.ClunoListItem
 import com.squareup.picasso.Picasso
-import java.lang.StringBuilder
 
-class ClunoListAdapter(val items: List<ClunoListItem>) : RecyclerView.Adapter<ClunoListAdapter.ClunoListViewHolder>() {
+class ClunoListAdapter(
+    val items: List<ClunoListItem>,
+    val itemClickListener: OnItemClickListener
+) :
+    RecyclerView.Adapter<ClunoListAdapter.ClunoListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClunoListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.cluno_list_item, parent, false)
@@ -30,6 +33,12 @@ class ClunoListAdapter(val items: List<ClunoListItem>) : RecyclerView.Adapter<Cl
         private val model: TextView = view.findViewById(R.id.model)
         private val carImage: ImageView = view.findViewById(R.id.carImage)
         private val price: TextView = view.findViewById(R.id.price)
+
+        init {
+            view.setOnClickListener {
+                itemClickListener.onItemClick(items[this.adapterPosition])
+            }
+        }
 
         fun bind(clunoListItem: ClunoListItem) {
             make.text = clunoListItem.car.make
